@@ -27,6 +27,7 @@ __error_responses__ = {
     "en-AU": "There was an error during the processing of your request!",
     "fr-FR": "Il y avait une erreur lors du traitement de votre demande!",
     "nl-NL": u"Er is een fout opgetreden tijdens de verwerking van uw aanvraag!",
+    "es-AR": u"Ocurrió un error mientras procesaba su solicitud!"
 }
 
 __error_location_help__ = {
@@ -36,6 +37,7 @@ __error_location_help__ = {
     "en-AU": u"I don’t know where you are… But you can help me find out…",
     "fr-FR": u"Je ne sais pas où vous êtes ... Mais vous pouvez m'aider à en savoir plus sur ...",
     "nl-NL": u"Ik weet niet waar je bent… Maar je kunt me helpen erachter te komen…",
+    "es-AR": u"No se donde se encuentra… Pero usted me puede ayudar…"
 }
 
 __error_location_saysettings__ = {
@@ -44,7 +46,8 @@ __error_location_saysettings__ = {
     "en-GB": u"In Location Services Settings, turn on both Location Services and Siri.",
     "en-AU": u"In Location Services Settings, turn on both Location Services and Siri.",
     "fr-FR": u"Dans les paramètres de service de localisation, activez les services de localisation et Siri.",
-    "nl-NL": u"In locatievoorzieningen instellingen, zet locatievoorzieningen en Siri aan."
+    "nl-NL": u"In locatievoorzieningen instellingen, zet locatievoorzieningen en Siri aan.",
+    "es-AR": u"En la pantalla de Ajustes de Localización, encienda Localización y Siri."
 }
 
 __error_location_settings__ = {
@@ -54,6 +57,7 @@ __error_location_settings__ = {
     "en-AU": u"Location Services Settings",
     "fr-FR": u"Services de localisation",
     "nl-NL": u"Locatievoorzieningen Instellingen",
+    "es-AR": u"Servicios de Localización"
 }
 
 

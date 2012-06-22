@@ -12,33 +12,40 @@ import random
 text = {
 	'numberNotPresent':{
 		u'de-DE': u"Ich habe diese {0} von {1} nicht, aber eine andere.",
-		u'en-US': u"Sorry, I don't have a {0} number from {1}, but another."
+		u'en-US': u"Sorry, I don't have a {0} number from {1}, but another.",
+		u'es-AR': u"Lo lamento, no tengo un número de {0} para {1} sino otro número."
 	},
 	'selectNumber':{
 		u'de-DE': u"Welche Telefonnummer für {0}",
-		u'en-US': u"Which phone one for {0}"
+		u'en-US': u"Which phone one for {0}",
+		u'es-AR': u"Qué número de teléfono para {0}?"
 	},
 	'errorNumberTypes':{
 		u'de-DE': u"Ich habe dich nicht verstanden, versuch es bitte noch einmal.",
-		u'en-US': u"Sorry, I did not understand, please try again."
+		u'en-US': u"Sorry, I did not understand, please try again.",
+		u'es-AR': u"Lo siento, no entiendo, por favor inténtelo nuevamente."
 	},
 	'selectMail':{
 		u'de-DE': u"Welche E-Mail adresse für {0}",
-		u'en-US': u"Which E-Mail adress for {0}"
+		u'en-US': u"Which E-Mail adress for {0}",
+		u'es-AR': u"Qué dirección de E-Mail para {0}?"
 	},
 	'select':{
 		u'de-DE': u"Welchen Kontakt genau?",
-		u'en-US': u"What kind of contact exactly?"
+		u'en-US': u"What kind of contact exactly?",
+		u'es-AR': u"Que tipo de contacto exactamente?"
 	},
 	'notFound':{
 		u'de-DE':u"Ich konnte {0} nicht finden!",
-		u'en-EN':u"I could not find {0}!"
+		u'en-EN':u"I could not find {0}!",
+		u'es-AR':u"No puedo encontrar {0}!"
 	}
 }
 
 speakableDemitter = {
 	'en-US': u", or ",
-	'de-DE': u', oder '
+	'de-DE': u', oder ',
+	'es-AR': u', o '
 }
 
 relationTypes = {
@@ -69,6 +76,20 @@ relationTypes = {
 		u"assistant" : '_$!<Assistant>!$_',
 		u"manager" : '_$!<Manager>!$_',
 		u"other" : '_$!<Other>!$_'
+	},
+	'es-AR' :{
+		u"madre" : '_$!<Mother>!$_',
+		u"padre" : '_$!<Father>!$_',
+		u"pariente" : '_$!<Parent>!$_',
+		u"hermano" : '_$!<Brother>!$_',
+		u"hermana" : '_$!<Sister>!$_',
+		u"hijo" : '_$!<Child>!$_',
+		u"amigo" : '_$!<Friend>!$_',
+		u"cónyuge" : '_$!<Spouse>!$_',
+		u"pareja" : '_$!<Partner>!$_',
+		u"asistente" : '_$!<Assistant>!$_',
+		u"gerente" : '_$!<Manager>!$_',
+		u"otro" : '_$!<Other>!$_'
 	}
 }
 
@@ -96,6 +117,18 @@ numberTypes = {
 		'_$!<OtherFAX>!$_': u"other fax",
 		'_$!<Pager>!$_': u"pager",
 		'_$!<Other>!$_': u"other phone",
+	},
+	'es-AR' :{
+		'_$!<Mobile>!$_': u"móvil",
+		'iPhone': u"iPhone",
+		'_$!<Home>!$_': u"casa",
+		'_$!<Work>!$_': u"trabajo",
+		'_$!<Main>!$_': u"principal",
+		'_$!<HomeFAX>!$_': u"fax casa",
+		'_$!<WorkFAX>!$_': u"fax trabajo",
+		'_$!<OtherFAX>!$_': u"otro fax",
+		'_$!<Pager>!$_': u"busca",
+		'_$!<Other>!$_': u"otro teléfono",
 	}
 }
 
@@ -109,25 +142,31 @@ mailTypes = {
 		'_$!<Home>!$_': u"home",
 		'_$!<Work>!$_': u"work",
 		'_$!<Other>!$_': u"other mail",
+	},
+	'es-AR' :{
+		'_$!<Home>!$_': u"casa",
+		'_$!<Work>!$_': u"trabajo",
+		'_$!<Other>!$_': u"otro mail",
 	}
 }
 
 numberTypesLocalized= {
-'_$!<Mobile>!$_': {'en-US': u"mobile", 'de-DE': u"Handynummer"},
-'iPhone': {'en-US': u"iPhone", 'de-DE': u"iPhone-Nummer"},
-'_$!<Home>!$_': {'en-US': u"home", 'de-DE': u"Privatnummer"},
-'_$!<Work>!$_': {'en-US': u"work", 'de-DE': u"Geschäftsnummer"},
-'_$!<Main>!$_': {'en-US': u"main", 'de-DE': u"Hauptnummer"},
-'_$!<HomeFAX>!$_': {'en-US': u"home fax", 'de-DE': u'private Faxnummer'},
-'_$!<WorkFAX>!$_': {'en-US': u"work fax", 'de-DE': u"geschäftliche Faxnummer"},
-'_$!<OtherFAX>!$_': {'en-US': u"_$!<OtherFAX>!$_", 'de-DE': u"_$!<OtherFAX>!$_"},
-'_$!<Pager>!$_': {'en-US': u"pager", 'de-DE': u"Pagernummer"},
-'_$!<Other>!$_':{'en-US': u"other phone", 'de-DE': u"anderes Telefon"}
+'_$!<Mobile>!$_': {'en-US': u"mobile", 'de-DE': u"Handynummer", 'es-AR': u"Móvil"},
+'iPhone': {'en-US': u"iPhone", 'de-DE': u"iPhone-Nummer", 'es-AR': u"iPhone"},
+'_$!<Home>!$_': {'en-US': u"home", 'de-DE': u"Privatnummer", 'es-AR': "Casa"},
+'_$!<Work>!$_': {'en-US': u"work", 'de-DE': u"Geschäftsnummer", 'es-AR': "Trabajo"}},
+'_$!<Main>!$_': {'en-US': u"main", 'de-DE': u"Hauptnummer", 'es-AR': "Principal"}},
+'_$!<HomeFAX>!$_': {'en-US': u"home fax", 'de-DE': u'private Faxnummer', 'es-AR': "Fax casa"}},
+'_$!<WorkFAX>!$_': {'en-US': u"work fax", 'de-DE': u"geschäftliche Faxnummer", 'es-AR': "Fax trabajo"}},
+'_$!<OtherFAX>!$_': {'en-US': u"_$!<OtherFAX>!$_", 'de-DE': u"_$!<OtherFAX>!$_", 'es-AR': "_$!<OtherFAX>!$_"}},
+'_$!<Pager>!$_': {'en-US': u"pager", 'de-DE': u"Pagernummer", 'es-AR': "Busca"},
+'_$!<Other>!$_':{'en-US': u"other phone", 'de-DE': u"anderes Telefon", 'es-AR': "Otro teléfono"}
 }
 
 namesToNumberTypes = {
 'de-DE': {'mobile': "_$!<Mobile>!$_", 'handy': "_$!<Mobile>!$_", 'zuhause': "_$!<Home>!$_", 'privat': "_$!<Home>!$_", 'arbeit': "_$!<Work>!$_"},
-'en-US': {'work': "_$!<Work>!$_",'home': "_$!<Home>!$_", 'mobile': "_$!<Mobile>!$_"}
+'en-US': {'work': "_$!<Work>!$_",'home': "_$!<Home>!$_", 'mobile': "_$!<Mobile>!$_"},
+'es-AR': {'trabajo': "_$!<Work>!$_",'casa': "_$!<Home>!$_", u'móvil': "_$!<Mobile>!$_", 'privado': "_$!<Home>!$_"}
 }
 
 identifierRetriever = re.compile("\^phoneCallContactId\^=\^urn:ace:(?P<identifier>.*)")
@@ -175,6 +214,27 @@ def replaceNumberType(name, language):
 			return '_$!<Pager>!$_'
 		if name == "other phone":
 			return '_$!<Other>!$_'
+        if language == "es-AR":
+                if name == "móvil":
+                        return '_$!<Mobile>!$_'
+                if name == "iPhone":
+                        return 'iPhone'
+                if name == "casa":
+                        return '_$!<Home>!$_'
+                if name == "trabajo":
+                        return '_$!<Work>!$_'
+                if name == "principal":
+                        return '_$!<Main>!$_'
+                if name == "fax casa":
+                        return '_$!<HomeFAX>!$_'
+                if name == "fax trabajo":
+                        return '_$!<WorkFAX>!$_'
+                if name == "otro fax":
+                        return '_$!<OtherFAX>!$_'
+                if name == "busca":
+                        return '_$!<Pager>!$_'
+                if name == "otro teléfono":
+                        return '_$!<Other>!$_'
 
 def replaceMailType(name, language):
 	if language == "de-DE":
@@ -191,6 +251,13 @@ def replaceMailType(name, language):
 			return '_$!<Work>!$_'
 		if name == "other mail":
 			return '_$!<Other>!$_'
+        if language == "es-AR":
+                if name == "casa":
+                        return '_$!<Home>!$_'
+                if name == "trabajo":
+                        return '_$!<Work>!$_'
+                if name == "otro mail":
+                        return '_$!<Other>!$_'
 		
 def getNumberTypeForName(name, language):
 	# q&d
