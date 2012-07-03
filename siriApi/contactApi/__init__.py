@@ -33,7 +33,7 @@ text = {
 	'select':{
 		u'de-DE': u"Welchen Kontakt genau?",
 		u'en-US': u"What kind of contact exactly?",
-		u'es-AR': u"Que tipo de contacto exactamente?"
+		u'es-AR': u"Cuál contacto exactamente?"
 	},
 	'notFound':{
 		u'de-DE':u"Ich konnte {0} nicht finden!",
@@ -511,9 +511,12 @@ def personAction(plugin, personsData, language):
 				choosenPersonIdentifier = identifierRetriever.match(choosenPerson)
 				if choosenPersonIdentifier:
 					choosenPersonIdentifier = choosenPersonIdentifier.group("identifier")
-					for personData in personsData:
-						if choosenPersonIdentifier == personData.identifier or choosenPerson == personData.fullName:
-							person = personData
+				for personData in personsData:
+					if choosenPersonIdentifier == personData.identifier or choosenPerson == personData.fullName:
+						person = personData
+				if person == None:
+                        		plugin.say(text['errorNumberTypes'][language].format(choosenPersonIdentifier))
+
 	if person != None:
 			return person
 	else:
