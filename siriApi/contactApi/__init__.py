@@ -38,7 +38,7 @@ text = {
 	'notFound':{
 		u'de-DE':u"Ich konnte {0} nicht finden!",
 		u'en-EN':u"I could not find {0}!",
-		u'es-AR':u"No puedo encontrar {0}!"
+		u'es-AR':u"Lo siento, no puedo encontrar {0} entre sus contactos!"
 	}
 }
 
@@ -153,20 +153,20 @@ mailTypes = {
 numberTypesLocalized= {
 '_$!<Mobile>!$_': {'en-US': u"mobile", 'de-DE': u"Handynummer", 'es-AR': u"Móvil"},
 'iPhone': {'en-US': u"iPhone", 'de-DE': u"iPhone-Nummer", 'es-AR': u"iPhone"},
-'_$!<Home>!$_': {'en-US': u"home", 'de-DE': u"Privatnummer", 'es-AR': "Casa"},
-'_$!<Work>!$_': {'en-US': u"work", 'de-DE': u"Geschäftsnummer", 'es-AR': "Trabajo"}},
-'_$!<Main>!$_': {'en-US': u"main", 'de-DE': u"Hauptnummer", 'es-AR': "Principal"}},
-'_$!<HomeFAX>!$_': {'en-US': u"home fax", 'de-DE': u'private Faxnummer', 'es-AR': "Fax casa"}},
-'_$!<WorkFAX>!$_': {'en-US': u"work fax", 'de-DE': u"geschäftliche Faxnummer", 'es-AR': "Fax trabajo"}},
-'_$!<OtherFAX>!$_': {'en-US': u"_$!<OtherFAX>!$_", 'de-DE': u"_$!<OtherFAX>!$_", 'es-AR': "_$!<OtherFAX>!$_"}},
-'_$!<Pager>!$_': {'en-US': u"pager", 'de-DE': u"Pagernummer", 'es-AR': "Busca"},
-'_$!<Other>!$_':{'en-US': u"other phone", 'de-DE': u"anderes Telefon", 'es-AR': "Otro teléfono"}
+'_$!<Home>!$_': {'en-US': u"home", 'de-DE': u"Privatnummer", 'es-AR': u"Casa"},
+'_$!<Work>!$_': {'en-US': u"work", 'de-DE': u"Geschäftsnummer", 'es-AR': u"Trabajo"},
+'_$!<Main>!$_': {'en-US': u"main", 'de-DE': u"Hauptnummer", 'es-AR': u"Principal"},
+'_$!<HomeFAX>!$_': {'en-US': u"home fax", 'de-DE': u'private Faxnummer', 'es-AR': u"Fax casa"},
+'_$!<WorkFAX>!$_': {'en-US': u"work fax", 'de-DE': u"geschäftliche Faxnummer", 'es-AR': u"Fax trabajo"},
+'_$!<OtherFAX>!$_': {'en-US': u"_$!<OtherFAX>!$_", 'de-DE': u"_$!<OtherFAX>!$_", 'es-AR': u"_$!<OtherFAX>!$_"},
+'_$!<Pager>!$_': {'en-US': u"pager", 'de-DE': u"Pagernummer", 'es-AR': u"Busca"},
+'_$!<Other>!$_':{'en-US': u"other phone", 'de-DE': u"anderes Telefon", 'es-AR': u"Otro teléfono"}
 }
 
 namesToNumberTypes = {
 'de-DE': {'mobile': "_$!<Mobile>!$_", 'handy': "_$!<Mobile>!$_", 'zuhause': "_$!<Home>!$_", 'privat': "_$!<Home>!$_", 'arbeit': "_$!<Work>!$_"},
 'en-US': {'work': "_$!<Work>!$_",'home': "_$!<Home>!$_", 'mobile': "_$!<Mobile>!$_"},
-'es-AR': {'trabajo': "_$!<Work>!$_",'casa': "_$!<Home>!$_", u'móvil': "_$!<Mobile>!$_", 'privado': "_$!<Home>!$_"}
+'es-AR': {'trabajo': "_$!<Work>!$_",'casa': "_$!<Home>!$_", u'móvil': "_$!<Mobile>!$_", u'movil': "_$!<Mobile>!$_", 'privado': "_$!<Home>!$_"}
 }
 
 identifierRetriever = re.compile("\^phoneCallContactId\^=\^urn:ace:(?P<identifier>.*)")
@@ -216,6 +216,8 @@ def replaceNumberType(name, language):
 			return '_$!<Other>!$_'
         if language == "es-AR":
                 if name == "móvil":
+                        return '_$!<Mobile>!$_'
+                if name == "movil":
                         return '_$!<Mobile>!$_'
                 if name == "iPhone":
                         return 'iPhone'
@@ -273,7 +275,12 @@ def getNumberTypeForName(name, language):
 def findPhoneForNumberType(plugin, person, numberType, language):
 	number = None
 	if numberType != None:
-		phoneToCall = filter(lambda x: x.label == numberType, person.phones)
+		number = filter(lambda x: x.label == numberType, person.phones)
+	        if len(number) == 0:
+         		number = None
+                else:
+                	number = number[0]
+
 	else:
 		favPhones = filter(lambda y: y.favoriteVoice if hasattr(y, "favoriteVoice") else False, person.phones)
 		if len(favPhones) == 1:
