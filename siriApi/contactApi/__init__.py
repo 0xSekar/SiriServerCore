@@ -39,6 +39,10 @@ text = {
 		u'de-DE':u"Ich konnte {0} nicht finden!",
 		u'en-EN':u"I could not find {0}!",
 		u'es-AR':u"Lo siento, no puedo encontrar {0} entre sus contactos!"
+	},
+	'notFoundRelation':{
+		u'en-EN':u"Sorry, I don't know who is your {0}!",
+		u'es-AR':u"Lo siento, no se quién es su {0}!"
 	}
 }
 
@@ -84,11 +88,14 @@ relationTypes = {
 		u"hermano" : '_$!<Brother>!$_',
 		u"hermana" : '_$!<Sister>!$_',
 		u"hijo" : '_$!<Child>!$_',
+		u"hija" : '_$!<Child>!$_',
 		u"amigo" : '_$!<Friend>!$_',
 		u"cónyuge" : '_$!<Spouse>!$_',
+		u"esposa" : '_$!<Spouse>!$_',
+		u"esposo" : '_$!<Spouse>!$_',
 		u"pareja" : '_$!<Partner>!$_',
 		u"asistente" : '_$!<Assistant>!$_',
-		u"gerente" : '_$!<Manager>!$_',
+		u"jefe" : '_$!<Manager>!$_',
 		u"otro" : '_$!<Other>!$_'
 	}
 }
@@ -441,6 +448,7 @@ def relatedNamesAction(plugin, personsData, relation, language):
 	lst.selectionResponse = "OK!"
 	root.views.append(lst)
 	i = 0
+	returnData = None
 	for person in personsData:
 		if person.label == relation:
 			i += 1
@@ -524,19 +532,30 @@ def personAction(plugin, personsData, language):
 
 def definePerson(plugin, scope, name, relation, me, language):
 	if relation != None:
-		relation = getRelation(plugin, relation, language)
+		relationEnc = getRelation(plugin, relation, language)
 		if me == True or name == None:
 			relationPerson = searchPerson(plugin, scope="Local", me=True)[0]
 		else:
 			relationPerson = searchPerson(plugin, scope="Local", name=name)[0]
-		name = relatedNamesAction(plugin, relationPerson.relatedNames, relation, language)
-	personsData = searchPerson(plugin, scope=scope, name=name)
-	if personsData == [] and name[-1] == "s":
-		name = name[:-1]
-		personsData = searchPerson(plugin, scope=scope, name=name)
-	personData = personAction(plugin, personsData, language)
-	if personData != None:
-		return personData
-	else:
-		plugin.say(text['notFound'][language].format(name))
+		name = relatedNamesAction(plugin, relationPerson.relatedNames, relationEnc, language)
+	if name == None:
+		plugin.say(text['notFoundRelation'][language].format(relation))
 		plugin.complete_request()
+		return None
+	else :
+		for person in relationPerson.relatedNames:
+			if person.label == relationEnc:
+				if name in person.name:
+					name = person.name
+		personsData = searchPerson(plugin, scope=scope, name=name)
+		if personsData == [] and name[-1] == "s":
+			name = name[:-1]
+			personsData = searchPerson(plugin, scope=scope, name=name)
+
+		personData = personAction(plugin, personsData, language)
+		if personData != None:
+			return personData
+		else:
+			plugin.say(text['notFound'][language].format(name))
+			plugin.complete_request()
+			return None
