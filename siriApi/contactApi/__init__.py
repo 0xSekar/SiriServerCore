@@ -465,7 +465,7 @@ def relatedNamesAction(plugin, personsData, relation, language):
 					item.selectionText = person.name
 					item.commands = []
 					item.speakableText = person.name
-					item.obj = person
+					item.object = person
 					#
 					#
 					#
@@ -502,7 +502,7 @@ def presentPossibleUsers(plugin, persons, language):
 		item.title = person.fullName
 		item.selectionText = person.fullName
 		item.speakableText = person.fullName
-		item.obj = person
+		item.object = person
 		#use the identifier here, it can distinquish better between users
 		item.commands = [SendCommands([StartRequest(False, "^phoneCallContactId^=^urn:ace:{0}".format(person.identifier))])]
 		lst.items.append(item)
