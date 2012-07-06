@@ -8,6 +8,7 @@ from siriObjects.systemObjects import DomainObjectUpdate, DomainObjectUpdateComp
 from siriObjects.uiObjects import *
 import re
 import random
+import unicodedata
 
 text = {
 	'numberNotPresent':{
@@ -177,6 +178,10 @@ namesToNumberTypes = {
 }
 
 identifierRetriever = re.compile("\^phoneCallContactId\^=\^urn:ace:(?P<identifier>.*)")
+
+def remove_accents(input_str):
+    nkfd_form = unicodedata.normalize('NFKD', unicode(input_str))
+    return u"".join([c for c in nkfd_form if not unicodedata.combining(c)])
 
 def replaceNumberType(name, language):
 	if language == "de-DE":
@@ -520,7 +525,7 @@ def personAction(plugin, personsData, language):
 				if choosenPersonIdentifier:
 					choosenPersonIdentifier = choosenPersonIdentifier.group("identifier")
 				for personData in personsData:
-					if choosenPersonIdentifier == personData.identifier or choosenPerson == personData.fullName:
+					if choosenPersonIdentifier == personData.identifier or remove_accents(choosenPerson).lower() == remove_accents(personData.fullName).lower():
 						person = personData
 				if person == None:
                         		plugin.say(text['errorNumberTypes'][language].format(choosenPersonIdentifier))
