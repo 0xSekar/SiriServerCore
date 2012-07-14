@@ -615,6 +615,7 @@ class SetAssistantData(ServerBoundCommand):
     groupIdentifier = "com.apple.ace.system"
     def __init__(self, plist):
         self.abSources = None # @"NSArray"
+	self.alerts = None # @"NSArray"
         self.anchor = None # @"NSString"
         self.censorSpeech = None # c
         self.debugFlags = None # @"NSNumber"

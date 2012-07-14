@@ -12,7 +12,7 @@ from siriObjects.speechObjects import Phrase, Recognition, SpeechRecognized, \
 from siriObjects.systemObjects import StartRequest, SendCommands, CancelRequest, \
     CancelSucceeded, GetSessionCertificate, GetSessionCertificateResponse, \
     CreateSessionInfoRequest, CommandFailed, RollbackRequest, CreateAssistant, \
-    AssistantCreated, SetAssistantData, LoadAssistant, AssistantNotFound, \
+    AssistantCreated, SetAssistantData, SetAlertContext, ClearContext, LoadAssistant, AssistantNotFound, \
     AssistantLoaded, DestroyAssistant, AssistantDestroyed
 from siriObjects.uiObjects import UIAddViews, UIAssistantUtteranceView, UIButton
 import PluginManager
@@ -352,6 +352,13 @@ class SiriProtocolHandler(Siri):
                 cmdFailed.errorCode = 2
                 self.send_object(cmdFailed)
                 self.logger.warning("Trying to set assistant data without having a valid assistant")
+
+        elif ObjectIsCommand(plist, SetAlertContext):
+                alertContext = SetAlertContext(plist)
+                self.assistant.alerts = alertContext.context
+
+	elif ObjectIsCommand(plist, ClearContext):
+                self.assistant.alerts = None
                 
         elif ObjectIsCommand(plist, LoadAssistant):
             loadAssistant = LoadAssistant(plist)
